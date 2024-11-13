@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font Awesome CDN for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Link to DESIGN.css in the static folder -->
+  
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Pest Catalog</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #228B22; /* Darker green */
+            color: white;
+        }
+
+        header img {
+            height: 200px; /* Logo size */
+            vertical-align: middle; /* Align logo with text */
+            margin-right: 20px; /* Space between logo and text */
+        }
+
+        header h1 {
+            display: inline;
+            vertical-align: middle;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Catalog Container */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Catalog Item */
+        .catalog-item {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .catalog-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .pest-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .pest-info {
+            padding: 15px;
+        }
+
+        .pest-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #228B22; /* Dark green color */
+        }
+
+        .pest-description {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            header img {
+                height: 150px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .catalog-container {
+                padding: 1rem;
+            }
+
+            .catalog-item {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .pest-title {
+                font-size: 1.25rem;
+            }
+
+            .pest-description {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .catalog-container {
+                grid-template-columns: 1fr; /* One column for very small screens */
+            }
+
+            .pest-image {
+                height: 150px; /* Smaller image height */
+            }
+
+            .pest-title {
+                font-size: 1.2rem;
+            }
+
+            .pest-description {
+                font-size: 0.85rem;
+            }
+        }
+        .catalog-item:hover {
+            cursor: pointer;
+            transform: translateY(-10px); /* Optional hover effect */
+
+        }
+        .catalog-container a {
+            text-decoration: none;  /* Remove underline */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="{{ url_for('static', filename='RPLogo.png') }}" alt="Rice Pest Catalog Logo">
+        <p>Explore the various Rice Pests that affect Rice Crops</p>
+    </header>
+
+    <div class="catalog-container">
+        <a href="{{ url_for('main_page') }}">
+        <!-- Green Leafhopper -->
+        <div class="catalog-item">
+            <img src="images/green_leafhopper.jpg" alt="Green Leafhopper" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Green Leafhopper</h2>
+                <p class="pest-description">Ang Green Leafhopper (GLH) ay sumisipsip ng katas mula sa mga halaman ng palay at nagdadala ng mga virus na nagdudulot ng mga sakit tulad ng Tungro.</p>
+            </div>
+        </div>
+        </a>
+
+        <a href="{{ url_for('main_page') }}">
+        <!-- Rice Bug -->
+        <div class="catalog-item">
+            <img src="images/rice_bug.jpg" alt="Rice Bug" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Rice Bug</h2>
+                <p class="pest-description">Ang Rice Bug ay sumisira sa mga butil ng palay, nagpapababa ng ani at nagpapahina ng kalidad ng palay.</p>
+            </div>
+        </div>
+         </a>
+
+         <a href="{{ url_for('main_page') }}">
+        <!-- Leaf Folder -->
+        <div class="catalog-item">
+            <img src="images/leaf_folder.jpg" alt="Leaf Folder" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Leaf Folder</h2>
+                <p class="pest-description">Ang Leaf Folder ay gumugol ng mga dahon at kinakain ang mga tisyu sa loob nito, na nagiging sanhi ng pinsala na nagpapababa sa kakayahan ng halaman na magsagawa ng potosintesis.</p>
+            </div>
+        </div>
+          </a>
+
+          <a href="{{ url_for('main_page') }}">
+        <!-- Stem Borer -->
+        <div class="catalog-item">
+            <img src="images/stem_borer.jpg" alt="Stem Borer" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Stem Borer</h2>
+                <p class="pest-description">Ang Stem Borers ay dumudulot ng pagkalagas sa mga tangkay ng palay, na nagiging sanhi ng pagkamatay ng halaman at humahantong sa malalang pagkawala ng ani.</p>
+            </div>
+        </div>
+     </a>
+        <!-- Zigzag Leafhopper -->
+        <div class="catalog-item">
+            <img src="images/zigzag_leafhopper.jpg" alt="Zigzag Leafhopper" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Zigzag Leafhopper</h2>
+                <p class="pest-description">Ang Zigzag Leafhopper ay sumisira sa mga halaman ng palay sa pamamagitan ng pagsipsip ng katas at nagsisilbi ring daluyan ng mga sakit ng halaman.</p>
+            </div>
+        </div>
+
+        <!-- Mealy Bug -->
+        <div class="catalog-item">
+            <img src="images/mealy_bug.jpg" alt="Mealy Bug" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Mealy Bug</h2>
+                <p class="pest-description">Ang Mealy Bugs ay nagpapahina sa mga halaman ng palay sa pamamagitan ng pagsipsip ng katas at pagpapalabas ng honeydew, na umaakit sa amag at nagpapababa ng ani.</p>
+            </div>
+        </div>
+
+        <!-- Mole Cricket -->
+        <div class="catalog-item">
+            <img src="images/mole_cricket.jpg" alt="Mole Cricket" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Mole Cricket</h2>
+                <p class="pest-description">Ang Mole Crickets ay sumisira sa mga ugat ng palay, na nagiging sanhi ng hindi paglaki ng halaman at pagpapababa ng ani.</p>
+            </div>
+        </div>
+
+        <!-- Rice Hispa -->
+        <div class="catalog-item">
+            <img src="images/rice_hispa.jpg" alt="Rice Hispa" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Rice Hispa</h2>
+                <p class="pest-description">Ang Rice Hispa ay kumakain ng ibabaw ng mga dahon ng palay, na nagpapababa sa kakayahan ng halaman na magsagawa ng potosintesis at nagpapababa ng ani.</p>
+            </div>
+        </div>
+
+        <!-- Root Aphid -->
+        <div class="catalog-item">
+            <img src="images/root_aphid.jpg" alt="Root Aphid" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Root Aphid</h2>
+                <p class="pest-description">Ang Root Aphids ay sumisira sa mga ugat ng palay, na nagiging sanhi ng hindi paglaki at mahinang pag-unlad ng ani.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

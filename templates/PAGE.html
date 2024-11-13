@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="{{ url_for('static', filename='DESIGN.css') }}" rel="stylesheet">
+    <title>Rice Pest Identifier</title>
+</head>
+<body>
+  
+    <!-- Loading Screen -->
+    <div id="loading-screen"> 
+        <img src="{{ url_for('static', filename='RPLogo.png') }}" alt="Loading Logo"> 
+    </div>
+    
+    <!-- Fixed Navbar -->
+    <nav>
+        <div class="navbar-brand">
+            <img src="{{ url_for('static', filename='RPLogo.png') }}" alt="Logo">
+            <p>Rice Pest Identifier And Pest Control Recommender</p>
+        </div>
+        <a href="{{ url_for('index') }}" class="home-link">HOME</a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="page-content" style="display: none; margin-bottom: 120px;"> <!-- Offset to avoid overlap with navbar -->
+        <!-- Container for both glasses -->
+        <div class="container">
+            <h1>Rice Pest Identifier</h1> 
+            <!-- First Glass -->
+            <div class="GLASS">
+                <!-- Form to upload the image and send for prediction -->
+                <form method="POST" action="/main" enctype="multipart/form-data">
+                    <!-- Hidden File Input -->
+                    <input type="file" id="file" name="imagefile" accept="image/*" style="display: none;" onchange="showFileName()">
+                    
+                    <!-- Upload Icon that acts as a button -->
+                    <div class="img-area" data-img="">
+                        <i class="fa-solid fa-upload fa-beat-fade fa-6x" id="upload-icon" style="color: #255107;"></i>
+                        <h2>Click to Upload Image</h2>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="select-image">IDENTIFY</button>
+               
+                
+                <!-- Clear Button -->
+                <button class="clear-image">CLEAR</button>
+            </div>
+
+            <!-- Second Glass (Positioned beside the first glass) -->
+            <div class="GLASS2">
+                <h3>Pest Name:</h3>
+                {% if prediction %}
+                    <h2>{{ prediction.split(' (')[0] }}</h2> <!-- Gets everything before the "(" -->
+                    <p>Accuracy: <span class="accuracy">{{ prediction.split('(')[-1].replace(')', '') }}</span></p> <!-- Extracts only the accuracy percentage -->
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            handlePredictionResponse("{{ prediction }}");
+                        });
+                    </script>
+                {% else %}
+                    <h2>No prediction available</h2>
+                {% endif %}
+            </div>
+            
+
+           
+           <!-- Updated Next Button with URL link, initially hidden -->
+<a href="{{ url_for('page2', predicted_class=predicted_class) }}"  type="submit" class="next-button" id="next-button" disable>Next</a> 
+        </form>
+        </div> 
+    </div>
+   
+         
+    <script src="{{ url_for('static', filename='JAVASC.js') }}"></script>
+</body>
+</html>

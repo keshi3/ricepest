@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rice Pest Catalog</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #228B22; /* Darker green */
+            color: white;
+        }
+
+        header img {
+            height: 50px; /* Logo size */
+            vertical-align: middle; /* Align logo with text */
+            margin-right: 20px; /* Space between logo and text */
+        }
+
+        header h1 {
+            display: inline;
+            vertical-align: middle;
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Catalog Container */
+        .catalog-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Catalog Item */
+        .catalog-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .catalog-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .pest-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .pest-info {
+            padding: 15px;
+        }
+
+        .pest-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #228B22; /* Dark green color */
+        }
+
+        .pest-description {
+            font-size: 1rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="{{ url_for('static', filename='RPLogo.png') }}" alt="Rice Pest Catalog Logo">
+        <h1>Rice Pest Catalog</h1>
+        <p>Explore the various pests that affect rice crops, along with descriptions and images for identification.</p>
+    </header>
+
+    <div class="catalog-container">
+        <!-- Green Leafhopper -->
+        <div class="catalog-item">
+            <img src="images/green_leafhopper.jpg" alt="Green Leafhopper" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Green Leafhopper</h2>
+                <p class="pest-description">The Green Leafhopper (GLH) feeds on the sap of rice plants, transmitting viruses that cause diseases such as Tungro.</p>
+            </div>
+        </div>
+
+        <!-- Rice Bug -->
+        <div class="catalog-item">
+            <img src="images/rice_bug.jpg" alt="Rice Bug" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Rice Bug</h2>
+                <p class="pest-description">Rice bugs feed on the grains of rice plants, reducing the yield and damaging the quality of the rice.</p>
+            </div>
+        </div>
+
+        <!-- Leaf Folder -->
+        <div class="catalog-item">
+            <img src="images/leaf_folder.jpg" alt="Leaf Folder" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Leaf Folder</h2>
+                <p class="pest-description">Leaf folders fold leaves and feed on the tissue inside, causing damage that reduces the plant's ability to photosynthesize.</p>
+            </div>
+        </div>
+
+        <!-- Stem Borer -->
+        <div class="catalog-item">
+            <img src="images/stem_borer.jpg" alt="Stem Borer" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Stem Borer</h2>
+                <p class="pest-description">Stem borers burrow into rice stems, causing the plant to wither and eventually die, leading to severe crop loss.</p>
+            </div>
+        </div>
+
+        <!-- Zigzag Leafhopper -->
+        <div class="catalog-item">
+            <img src="images/zigzag_leafhopper.jpg" alt="Zigzag Leafhopper" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Zigzag Leafhopper</h2>
+                <p class="pest-description">Zigzag leafhoppers damage rice plants by sucking the sap, and they also act as vectors for plant diseases.</p>
+            </div>
+        </div>
+
+        <!-- Mealy Bug -->
+        <div class="catalog-item">
+            <img src="images/mealy_bug.jpg" alt="Mealy Bug" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Mealy Bug</h2>
+                <p class="pest-description">Mealy bugs weaken rice plants by sucking their sap and excreting honeydew, which attracts mold and reduces crop yield.</p>
+            </div>
+        </div>
+
+        <!-- Mole Cricket -->
+        <div class="catalog-item">
+            <img src="images/mole_cricket.jpg" alt="Mole Cricket" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Mole Cricket</h2>
+                <p class="pest-description">Mole crickets damage rice plants by feeding on their roots, which leads to stunted growth and reduced yield.</p>
+            </div>
+        </div>
+
+        <!-- Rice Hispa -->
+        <div class="catalog-item">
+            <img src="images/rice_hispa.jpg" alt="Rice Hispa" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Rice Hispa</h2>
+                <p class="pest-description">Rice Hispa scrapes the surface of rice leaves, reducing the plant's ability to photosynthesize and ultimately lowering crop productivity.</p>
+            </div>
+        </div>
+
+        <!-- Root Aphid -->
+        <div class="catalog-item">
+            <img src="images/root_aphid.jpg" alt="Root Aphid" class="pest-image">
+            <div class="pest-info">
+                <h2 class="pest-title">Root Aphid</h2>
+                <p class="pest-description">Root aphids damage rice plants by feeding on their roots, leading to stunted growth and poor crop development.</p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

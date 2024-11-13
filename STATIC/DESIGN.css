@@ -1,0 +1,525 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body and page layout */
+body {
+    margin: 0;
+    padding: 0;
+    background: url('BG2.png') no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Full height of the viewport */
+    overflow: hidden; /* Prevent body from scrolling */
+}
+
+/* Add a semi-transparent overlay */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(110, 242, 39, 0.141); /* White color with 50% opacity */
+    z-index: -1; /* Ensures the overlay stays behind the content */
+}
+
+/* Image area and container */
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background-color: rgba(255, 255, 255, 0.2);  /* Semi-transparent background */
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-area .icon {
+    font-size: 100px;
+}
+
+.img-area h2 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    margin-top: 10px;
+    color: #255107;
+}
+
+.img-area p {
+    color: #999;
+}
+
+.img-area p span {
+    font-weight: 600;
+}
+
+.img-area img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 100;
+}
+
+.img-area::before {
+    content: attr(data-img);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .3s ease;
+    z-index: 200;
+}
+
+.img-area.active:hover::before {
+    opacity: 1;
+}
+
+/* Upload button */
+.select-image {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    border-radius: 15px;
+    background: #255107;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-weight: 600;
+    opacity: 75%;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-top: 20px; /* Added margin-top to space it from the content above */
+}
+
+.clear-image {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    border-radius: 15px;
+    background: #255107;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-weight: 600;
+    opacity: 75%;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-top: 20px; /* Added margin-top to space it from the content above */
+}
+
+.clear-image:hover {
+    background: #ef2113;
+}
+
+.select-image:hover {
+    background: #39ed3f;
+}
+
+/* Identify button */
+.next {
+    display: block;
+    width: 200px; /* Set a fixed width */
+    padding: 16px 0;
+    border-radius: 15px;
+    background: #43c60b;
+    color: #fff;
+    font-weight: 800;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-top: 20px; /* Added margin-top to space it from the content above */
+    margin-left: auto; /* Centers the button horizontally */
+    margin-right: auto; /* Centers the button horizontally */
+}
+
+.next:hover {
+    background: #217c08;
+}
+/* Loading screen styles */
+#loading-screen {
+    position: fixed;      /* Ensures it stays fixed in place */
+    top: 0;
+    left: 0;
+    width: 100vw;         /* Full width of the viewport */
+    height: 100vh;        /* Full height of the viewport */
+    background-color: #4F6932; /* Background color for the loading screen */
+    display: flex;
+    justify-content: center; /* Centers content horizontally */
+    align-items: center;     /* Centers content vertically */
+    z-index: 1500;          /* Keeps it above other content */
+    overflow: hidden;       /* Prevents scrolling during loading */
+}
+
+/* Spinner circles */
+.spinner {
+    position: absolute;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color: #9b59b6;
+    background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+    animation: rotate_3922 2s infinite linear;
+}
+
+.spinner:nth-of-type(1) {
+    filter: blur(5px);
+    animation-duration: 2s;
+}
+
+.spinner:nth-of-type(2) {
+    filter: blur(10px);
+    animation-duration: 2.5s;
+}
+
+.spinner:nth-of-type(3) {
+    filter: blur(25px);
+    animation-duration: 3s;
+}
+
+.spinner:nth-of-type(4) {
+    filter: blur(50px);
+    animation-duration: 3.5s;
+}
+
+/* Logo styling */
+#loading-screen img {
+    width: 300px;
+    z-index: 2;
+}
+
+/* Rotating animation */
+@keyframes rotate_3922 {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Hide the page content initially */
+.page-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;  /* Optional: you can adjust this to your preference */
+    max-height: 100vh; /* Prevent any overflow beyond the viewport height */
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    transform: scale(0.85); /* Scale down content by 85% */
+    transform-origin: center; /* Keep the content centered */
+  
+}
+/* Glass effect container */
+.GLASS {
+    background: rgba(255, 255, 255, 0.7); /* Semi-transparent background for GLASS */
+    border-radius: 16px;
+    width: 95%; /* Increased width to make it wider */
+    padding: 30px; /* Increased padding */
+    box-sizing: border-box; /* Ensures padding is included in width */
+    font-size: 18px; /* Adjust font size for better readability */
+}
+
+/* Glass effect container 2 (for Pest Name) */
+.GLASS2 {
+    background: rgba(240, 240, 240, 0.7); /* Background for GLASS2 */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    width: 300px; /* Fixed width */
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    text-align: left;
+    margin: 0 auto; /* Center the container */
+    font-size: 18px;
+}
+
+
+
+
+.GLASS2 h2 {
+    font-size: 18px;
+    font-weight: bold;
+    color:#1b4d20;;
+    margin-bottom: 8px; /* Adds space between sections */
+}
+.GLASS2 h3 {
+    font-size: 16px;
+    font-weight: 200;
+    color:#1b4d20;;
+    margin-bottom: 8px; /* Adds space between sections */
+}
+.GLASS2 p {
+    font-size: 16px;
+    font-weight: 200;
+    color:#1b4d20;;
+}
+
+.GLASS2 .accuracy {
+    font-size: 16px;
+    font-weight: bold;
+    color:#1b4d20;;
+}
+
+
+/* Styling for pest name */
+.pest-name {
+    font-size: 20px; /* Slightly larger font for emphasis */
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 8px;
+}
+
+/* Styling for accuracy */
+.accuracy {
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.2); /* Frosted glass effect */
+    backdrop-filter: blur(10px); /* Blurs the background */
+    padding: 30px; /* Adds padding inside the container */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+    width: 600px; /* Set the exact width of the container */
+    max-width: 80%; /* Limit the container to 80% width of the viewport */
+    min-height: 600px; /* Height for your content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: visible;
+    margin: 50px auto; /* Center the container horizontally */
+    box-sizing: border-box;
+    gap: 10px;
+    
+
+}
+
+.container h1{
+    color: white;
+}
+/* Media Query for smaller devices */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack the glasses vertically on smaller screens */
+        gap: 10px; /* Reduce space between the glasses */
+    }
+
+    .GLASS, .GLASS2 {
+        width: 100%; /* Take full width on smaller screens */
+    }
+}
+
+
+.next-button {
+    margin-top: 20px; /* Space between the content and the button */
+    padding: 15px 30px;
+    background-color:  #e0cb33;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.next-button:hover {
+    background-color: #948620;;
+}
+ /* Navbar styling */
+ nav {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 8px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    margin-top: 10px; /* Slight spacing from the top */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed; /* Keeps navbar at the top */
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+nav img {
+    width: 40px;
+    height: auto;
+}
+
+nav p {
+    color: #255107;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+
+}
+
+/* Style for the Home link */
+.home-link {
+    color: white;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 16px;
+    border-radius: 20px;
+    background-color: #1b4d20;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.home-link:hover {
+    background-color: #2ea02b;
+}
+
+/* Main Content Styling */
+.main-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px; /* Offset to avoid overlap with fixed navbar */
+    min-height: 70vh; /* Keeps it centered on the page */
+}
+
+/* Glass effect container */
+.GLASS1 {
+    background: rgba(255, 255, 255, 0.37);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    width: 90%;
+    max-width: 800px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 20px; /* Adds space between GLASS1 and buttons */
+}
+
+/* Text style for GLASS1 */
+.GLASS1 h3 {
+    color: #ffffff;
+    font-size: 22px;
+    margin: 0;
+    padding: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* Button styles */
+.page_buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.page_button {
+    padding: 16px 0;
+    width: 100px;
+    border-radius: 15px;
+    background: #e0cb33;
+    color: #1b4d20;
+    font-weight: 1000;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.page_button:hover {
+    background: #948620;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    nav {
+        width: 90%;
+        padding: 8px 15px;
+    }
+    .home-link {
+        font-size: 12px;
+        padding: 5px 14px;
+    }
+    nav p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .GLASS1 {
+        width: 100%;
+        padding: 15px;
+    }
+    nav p {
+        font-size: 12px;
+        text-align: center;
+    }
+    .home-link {
+        padding: 4px 12px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-content {
+        width: 90%;  /* Use more width for smaller screens */
+        max-height: 80vh;  /* Reduce max height on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .page-content {
+        width: 95%;  /* Further adjust width for very small screens */
+        max-height: 70vh;  /* Allow more vertical space */
+    }
+}

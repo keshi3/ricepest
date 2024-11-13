@@ -1,0 +1,235 @@
+
+
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body and page layout */
+body {
+    display: flex;
+    justify-content: center;   /* Centers horizontally */
+    align-items: center;       /* Centers vertically */
+    flex-direction: column;
+    min-height: 100vh;
+    background: url('GREEN.svg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Add a semi-transparent overlay */
+body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(110, 242, 39, 0.141); /* White color with 50% opacity */
+    z-index: -1; /* Ensures the overlay stays behind the content */
+}
+
+/* Image area and container */
+.img-area {
+    position: relative;
+    width: 100%;
+    height: 240px;
+    background: #f2f2f2; /* Light grey background */
+    margin-bottom: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-area .icon {
+    font-size: 100px;
+}
+
+.img-area h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.img-area p {
+    color: #999;
+}
+
+.img-area p span {
+    font-weight: 600;
+}
+
+.img-area img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 100;
+}
+
+.img-area::before {
+    content: attr(data-img);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .3s ease;
+    z-index: 200;
+}
+
+.img-area.active:hover::before {
+    opacity: 1;
+}
+
+/* Upload button */
+.select-image {
+    display: block;
+    width: 100%;
+    padding: 16px 0;
+    border-radius: 15px;
+    background: #255107;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+    font-weight: 600;
+    opacity: 75%;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-top: 20px; /* Added margin-top to space it from the content above */
+}
+
+.select-image:hover {
+    background: #39ed3f;
+}
+
+/* Identify button */
+.next {
+    display: block;
+    width: 200px; /* Set a fixed width */
+    padding: 16px 0;
+    border-radius: 15px;
+    background: #43c60b;
+    color: #fff;
+    font-weight: 800;
+    font-size: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease;
+    margin-top: 20px; /* Added margin-top to space it from the content above */
+    margin-left: auto; /* Centers the button horizontally */
+    margin-right: auto; /* Centers the button horizontally */
+}
+
+.next:hover {
+    background: #217c08;
+}
+
+/* Loading screen styles */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #4F6932;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1500; 
+}
+
+#loading-screen img {
+    width: 500px;
+    z-index: 2; /* Ensure the logo stays above the circles */
+}
+
+/* Loading animation */
+.loading-effect {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    background: url('../images/loading-white1.png') no-repeat center center;
+    background-size: contain; /* Makes sure the image stays within bounds */
+    animation: spin 6s linear infinite; /* Spinning effect */
+    z-index: 1; /* Below the logo */
+}
+
+/* Keyframes for the spinning effect */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Hide the page content initially */
+.page-content {
+    display: none;
+}
+
+/* Glass effect container */
+.GLASS {
+    background: rgba(255, 255, 255, 0.37);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(4.5px);
+    -webkit-backdrop-filter: blur(4.5px);
+    border: 1px solid rgba(255, 255, 255, 0.48);
+    width: 90%; /* Make the width responsive */
+    max-width: 1000px; /* Maximum width limit */
+    min-width: 320px; /* Minimum width for smaller screens */
+    padding: 40px; /* Optional: Increase padding for more space inside */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .GLASS {
+        width: 95%; /* Reduce width for smaller screens */
+        padding: 20px; /* Reduce padding on smaller devices */
+    }
+
+    .next {
+        width: 180px; /* Adjust button width on smaller screens */
+        font-size: 24px; /* Adjust font size */
+    }
+}
+
+@media (max-width: 480px) {
+    .GLASS {
+        width: 100%; /* Full width for mobile screens */
+        padding: 15px; /* Reduce padding further */
+    }
+
+    .next {
+        width: 160px; /* Adjust button width for mobile */
+        font-size: 20px; /* Adjust font size */
+    }
+
+    .img-area {
+        height: 200px; /* Make the image area smaller on mobile */
+    }
+}
