@@ -9,7 +9,9 @@ const nextButton = document.querySelector('.next-button');
 // Initially disable the identify button
 identifyButton.disabled = true;
 
-nextButton.style.display = 'none';
+if (nextButton) {
+    nextButton.style.display = 'none';
+}
 
 // When the upload icon is clicked, trigger the file input
 uploadIcon.addEventListener('click', () => {
@@ -19,7 +21,7 @@ uploadIcon.addEventListener('click', () => {
 // SHOW PIC
 fileInput.addEventListener('change', function () {
     const image = this.files[0];
-    if(image && image.size < 2000000) { // Ensure the image is under 2MB
+    if (image && image.size < 2000000) { // Ensure the image is under 2MB
         const reader = new FileReader();
         reader.onload = () => {
             // Remove any previous images
@@ -27,9 +29,8 @@ fileInput.addEventListener('change', function () {
             allImg.forEach(item => item.remove());
             
             // Create an image element and set its source
-            const imgUrl = reader.result;
             const img = document.createElement('img');
-            img.src = imgUrl;
+            img.src = reader.result;
             img.classList.add('uploaded-image'); // Add a class to style if needed
 
             // Append the image to the image area
@@ -57,31 +58,35 @@ clearButton.addEventListener('click', () => {
 
     // Disable the identify button when image is cleared
     identifyButton.disabled = true;
-    nextButton.style.display = 'none';
+    if (nextButton) nextButton.style.display = 'none';
 });
 
-
-
-
- 
+// HANDLE PREDICTION RESPONSE
 function handlePredictionResponse(prediction) {
     if (prediction) {
-        //s-show nya ung next button if ung pest is identified na
-        nextButton.style.display = 'inline-block'
-        nextButton.disabled = false
+        if (nextButton) {
+            nextButton.style.display = 'inline-block'; // Show next button if prediction is available
+            nextButton.disabled = false;
+        }
     } else {
-        //pag nag false na ung if, hide nya ung next button kapag dipa nakakapag identify
-        nextButton.style.display = 'none'
-        nextButton.disabled = true
+        if (nextButton) {
+            nextButton.style.display = 'none'; // Hide next button if no prediction
+            nextButton.disabled = true;
+        }
     }
 }
-
 
 // Loading screen handling
 window.onload = function() {
     setTimeout(function(){
-        document.getElementById('loading-screen').style.display = 'none';
-        document.querySelector('.page-content').style.display = 'block';
-    }, 3000); // Adjust this duration as needed
+        const loadingScreen = document.getElementById('loading-screen');
+        const pageContent = document.querySelector('.page-content');
+        
+        if (loadingScreen) {
+            loadingScreen.style.display = 'none'; // Hide loading screen
+        }
+        if (pageContent) {
+            pageContent.style.display = 'block'; // Show main content
+        }
+    }, 3000); // Adjust the duration for loading screen as needed
 };
-

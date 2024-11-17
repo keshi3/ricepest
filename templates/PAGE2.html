@@ -15,8 +15,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            height: 100vh;
     
-            overflow: hidden;
+     
         }
 
         .container {
@@ -33,6 +34,7 @@
             align-items: center;
             overflow: hidden;
             z-index: 1;
+            
         }
 
        h1 {
@@ -124,23 +126,31 @@
             background-color: #2ecc71;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 20px) {
+
+          .container{
+
+          }
             .form-container {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
             }
 
             .image-container {
-                width: 80%;
+                width: 550%;
                 margin-bottom: 20px;
             }
+          
 
             h1 {
                 font-size: 22px;
+                
             }
 
             button {
                 font-size: 16px;
+                
             }
         }
 
@@ -228,14 +238,19 @@
                 <div class="form-group">
                     <label for="season">Season:</label>
                     <select name="season" id="season" required>
-                        <option value="sunny">Wet</option>
-                        <option value="rainy">Dry</option>
+                        <option value="sunny">Sunny</option>
+                        <option value="rainy">Rainy</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="pest_count">Pest Count:</label>
-                    <input type="number" id="pest_count" name="pest_count" min="1" step="1" required>
+                    <label for="pest_count">Pest Count per Sq:</label>
+                    <select id="pest_count" name="pest_count" required>
+                        <option value="1">1-5</option>
+                        <option value="30">6-60</option>
+                        <option value="100">61-150</option>
+                        <option value="200">Too Many</option>
+                    </select>
                 </div>
                 
 
@@ -249,28 +264,18 @@
         {% if technique_name and technique_description %}
         <div class="result">
             <h2>Recommended Technique: {{ technique_name }}</h2>
-            <p><strong>Description:</strong> {{ technique_description }}</p>
+            <p><strong>Description:</strong> {{ technique_description | safe}}</p>
 
-            {% if method %}
-                <h3>Actionable Steps:</h3>
-                <ul>
-                    {% for step in method['steps'] %}
-                        <li>{{ step }}</li>
-                    {% endfor %}
-                </ul>
+        
 
-                <h4>Materials Needed:</h4>
-                <ul>
-                    {% for material in method['materials_needed'] %}
-                        <li>{{ material }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+              
         </div>
         <div class="page_buttons">
             <a href="{{ url_for('catalog') }}" class="page_button">See Other Pest Catalog</a>
         </div>
         {% endif %}
+
+
     </div>
 </body>
 </html>

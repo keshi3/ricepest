@@ -24,7 +24,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="page-content" style="display: none; margin-bottom: 120px;"> <!-- Offset to avoid overlap with navbar -->
+    <div class="page-content" style="display: none; margin-bottom: 200px;"> <!-- Offset to avoid overlap with navbar -->
         <!-- Container for both glasses -->
         <div class="container">
             <h1>Rice Pest Identifier</h1> 
@@ -33,8 +33,8 @@
                 <!-- Form to upload the image and send for prediction -->
                 <form method="POST" action="/main" enctype="multipart/form-data">
                     <!-- Hidden File Input -->
-                    <input type="file" id="file" name="imagefile" accept="image/*" style="display: none;" onchange="showFileName()">
-                    
+                    <input type="file" id="file" name="imagefile" accept= "image/*"  style="display: none;" onchange="showFileName()">
+            
                     <!-- Upload Icon that acts as a button -->
                     <div class="img-area" data-img="">
                         <i class="fa-solid fa-upload fa-beat-fade fa-6x" id="upload-icon" style="color: #255107;"></i>
@@ -67,12 +67,14 @@
             
 
            
-           <!-- Updated Next Button with URL link, initially hidden -->
-<a href="{{ url_for('page2', predicted_class=predicted_class) }}"  type="submit" class="next-button" id="next-button" disable>Next</a> 
         </form>
+           
         </div> 
     </div>
-   
+            {% if predicted_class != 'Non Pest' %}         
+           <!-- Updated Next Button with URL link, initially hidden -->
+            <a href="{{ url_for('page2', predicted_class=predicted_class) }}"  type="submit" class="next-button" id="next-button" disable align="center">Next</a> 
+            {% endif %}
          
     <script src="{{ url_for('static', filename='JAVASC.js') }}"></script>
 </body>

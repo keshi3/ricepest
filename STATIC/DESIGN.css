@@ -510,16 +510,11 @@ nav p {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 701px) {
     .page-content {
-        width: 90%;  /* Use more width for smaller screens */
+        width: 120%;  /* Use more width for smaller screens */
         max-height: 80vh;  /* Reduce max height on smaller screens */
     }
 }
 
-@media (max-width: 480px) {
-    .page-content {
-        width: 95%;  /* Further adjust width for very small screens */
-        max-height: 70vh;  /* Allow more vertical space */
-    }
-}
+

@@ -112,16 +112,20 @@ def page2():
         # Retrieve form data for the recommendation system
         pest_type = request.form.get("pest_type")
         season = request.form.get("season")
-        pest_count = float(request.form.get("pest_count"))
+        pest_count = int(request.form.get("pest_count"))
+        
+        pest_density = get_pest_density(pest_count) 
 
         # Generate recommendation based on input
         technique_name, technique_description = predict_recommendation(pest_type, season, pest_count)
 
         # Pass the prediction and recommendation to the template
         return render_template('PAGE2.html', 
-                               technique_name=technique_name,
-                               technique_description=technique_description,
-                               predicted_class=pest_type)  # Make sure predicted_class is passed
+                       technique_name=technique_name,
+                       technique_description=technique_description,
+                       predicted_class=pest_type, 
+                       pest_density=pest_density)
+
 
     # Handle GET request: Show prediction if available
     predicted_class = request.args.get('predicted_class')
